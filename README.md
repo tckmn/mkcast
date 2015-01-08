@@ -2,6 +2,8 @@
 
 A tool for creating GIF screencasts of a terminal, with key presses overlaid.
 
+![](demo.gif)
+
 Dependencies: `wmctrl`, `byzanz-record` (slightly patched `screenkey` already bundled)
 
 Usage: ./cast WINNAME DURATION [COMMAND (optional)]
