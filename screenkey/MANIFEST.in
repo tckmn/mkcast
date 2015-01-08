@@ -1,0 +1,2 @@
+include screenkey README LICENSE
+recursive-include data *

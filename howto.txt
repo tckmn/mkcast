@@ -1,0 +1,3 @@
+large = 24
+medium = 12
+small = 8

@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+# Copyright (c) 2010 Pablo Seminario <pabluk@gmail.com>
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import logging
+from optparse import OptionParser
+import pygtk
+pygtk.require('2.0')
+import gtk
+import gettext
+import locale
+
+locale.setlocale(locale.LC_ALL, '')
+gettext.install('screenkey', unicode=True)
+
+from Screenkey import APP_NAME, APP_DESC, VERSION
+from Screenkey.screenkey import Screenkey
+
+gtk.gdk.threads_init()
+
+def Main():
+    parser = OptionParser(description=APP_DESC, version=VERSION)
+    parser.add_option("--no-detach", action="store_true", 
+        dest="nodetach", default=False, 
+        help=_("do not detach from the parent"))
+    parser.add_option("-d", "--debug", action="store_true", 
+        dest="debug", default=False, help=_("show debug information"))
+    (options, args) = parser.parse_args()
+
+    if options.debug:
+        if options.nodetach:
+            # Send debug messages to standard output
+            logfile = None
+        else:
+            logfile = os.path.join(os.path.expanduser('~'), 
+                                   '.screenkey.log')
+            username = os.environ.get('SUDO_USER')
+            if username:
+                homedir = os.path.expanduser('~%s' % username)
+                if homedir != '~%s' % username:
+                    logfile = os.path.join(homedir, '.screenkey.log')
+        logging.basicConfig(filename=logfile, level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(APP_NAME)
+
+    s = Screenkey(logger=logger, nodetach=options.nodetach)
+    gtk.main()
+
+
+if __name__ == "__main__":
+    Main()
+

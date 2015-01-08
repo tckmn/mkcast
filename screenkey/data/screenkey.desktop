@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Screenkey
+Comment=Screencast your keys
+Version=0.2
+Exec=screenkey
+Terminal=false
+Icon=preferences-desktop-keyboard-shortcuts
+Type=Application
+Categories=GNOME;Utility

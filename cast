@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# != 2 ]
+then
+    echo "Incorrect number of arguments."
+    echo "Usage: $0 [window name] [duration]"
+    exit
+fi
+
+# get screen dimensions
+IFS='x' read sw sh < <(xdpyinfo | grep dimensions | grep -o '[0-9x]*' | head -n1)
+# get window geometry
+read wx wy ww wh < <(wmctrl -lG | grep $1 | sed 's/^[^ ]* *[^ ]* //;s/[^0-9 ].*//;')
+# compute and set new coordinates
+wx=$(($sw/2-$ww/2))
+wy=$(($sh-$wh))
+wmctrl -r $1 -e 0,$wx,$wy,$ww,$wh
+
+# start screenkey
+./screenkey/screenkey
+
+# start recording the window
+byzanz-record -x $wx -y $wy -w $ww -h $wh -d $2 out.gif 2> /dev/null &
