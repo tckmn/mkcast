@@ -1,10 +1,23 @@
 #!/bin/bash
 
-if [ $# != 2 ]
+if [ $# != 2 ] && [ $# != 3 ]
 then
     echo "Incorrect number of arguments."
-    echo "Usage: $0 [window name] [duration]"
+    echo "Usage: $0 [WINNAME] [DURATION] [CMD (optional)]"
     exit
+fi
+
+if [ -f out.gif ]
+then
+    echo "Warning: out.gif already exists."
+    read -p "Continue? [y/n]" yn
+    case $yn in
+        [Yy]*)
+            ;;
+        *)
+            exit
+            ;;
+    esac
 fi
 
 # get screen dimensions
@@ -16,8 +29,19 @@ wx=$(($sw/2-$ww/2))
 wy=$(($sh-$wh))
 wmctrl -r $1 -e 0,$wx,$wy,$ww,$wh
 
+# run command if provided
+if [ $3 ]
+then
+    $3
+fi
+
+(
 # start screenkey
-./screenkey/screenkey
+./screenkey/screenkey >/dev/null 2>&1
 
 # start recording the window
-byzanz-record -x $wx -y $wy -w $ww -h $wh -d $2 out.gif 2> /dev/null &
+byzanz-record -x $wx -y $wy -w $ww -h $wh -d $2 out.gif 2> /dev/null
+
+# finished
+ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
+) &

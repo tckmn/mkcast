@@ -64,7 +64,7 @@ class Screenkey(gtk.Window):
 
         self.options = self.load_state()
         if not self.options:
-            with open('../../screenkey.conf') as f:
+            with open(os.path.join(os.path.dirname(__file__), '..', '..', 'screenkey.conf')) as f:
                 self.options = eval(f.read())
 
         if not nodetach:
