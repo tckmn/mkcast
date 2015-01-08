@@ -41,7 +41,7 @@ ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
 ) &
 
 # run command if provided
-if [ $3 ]
+if [ "$3" ]
 then
     $3
 fi
