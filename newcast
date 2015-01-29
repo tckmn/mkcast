@@ -1,0 +1,4 @@
+#!/bin/bash
+gnome-terminal --window-with-profile mkcast -t mkcast
+sleep 0.5
+mkcast mkcast "$@"

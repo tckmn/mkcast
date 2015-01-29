@@ -31,7 +31,7 @@ wmctrl -r $1 -e 0,$wx,$wy,$ww,$wh
 
 (
 # start screenkey
-./screenkey/screenkey >/dev/null 2>&1
+"$(dirname "$(readlink -f "$0")")/screenkey/screenkey" >/dev/null 2>&1
 
 # start recording the window
 byzanz-record -x $wx -y $wy -w $ww -h $wh -d $2 out.gif 2> /dev/null
