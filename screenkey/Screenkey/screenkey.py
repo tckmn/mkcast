@@ -79,9 +79,9 @@ class Screenkey(gtk.Window):
         self.set_property('accept-focus', False)
         self.set_property('focus-on-map', False)
         self.set_position(gtk.WIN_POS_CENTER)
-        bgcolor = gtk.gdk.color_parse("black")
+        bgcolor = gtk.gdk.color_parse(self.options['bgcolor'])
         self.modify_bg(gtk.STATE_NORMAL, bgcolor)
-        self.set_opacity(0.7)
+        self.set_opacity(self.options['opacity'])
 
         gobject.signal_new("text-changed", gtk.Label, 
                         gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ())
@@ -196,9 +196,9 @@ class Screenkey(gtk.Window):
         attr = pango.AttrList()
         attr.change(pango.AttrSize((
                     50 * window_height / 100) * 1000, 0, -1))
-        attr.change(pango.AttrFamily("Sans", 0, -1))
+        attr.change(pango.AttrFamily(self.options['font'], 0, -1))
         attr.change(pango.AttrWeight(pango.WEIGHT_BOLD, 0, -1))
-        attr.change(pango.AttrForeground(65535, 65535, 65535, 0, -1))
+        attr.change(pango.AttrForeground(*self.options['color']))
 
         self.label.set_attributes(attr)
         self.resize(window_width, window_height)
