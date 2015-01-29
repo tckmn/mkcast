@@ -22,7 +22,7 @@ Examples:
     # asks for arguments to newcast, type ex. "10 -c reset"
     ./askcast
 
-Suggested use: symlink `mkcast`, `newcast`, and `askcast` in `/usr/local/bin`, and simply type (in GNOME) `Alt+F2 askcast Enter` for a quick mini-cast.
+Suggested use: symlink `mkcast`, `newcast`, and `askcast` in `/usr/local/bin`, and simply type (in GNOME) `Alt+F2 askcast Enter` for a quick mini-cast. This even allows you to set up a `gnome-terminal` profile called "mkcast," letting you automatically start a command when it opens (such as `vim`), customize the size or colors of the new terminal that is created, etc.
 
 screencast.conf format:
 
@@ -34,3 +34,5 @@ screencast.conf format:
     }
 
 Only tested on GNOME on Ubuntu so far.
+
+The name has a double meaning: **m**ini-**k**ey-**cast**, or **m**a**k**e cast (like mkdir).
