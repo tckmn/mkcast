@@ -1,11 +1,26 @@
 #!/bin/bash
 
-if [ $# != 2 ] && [ $# != 3 ]
+if [ $# -lt 2 ]
 then
-    echo "Incorrect number of arguments."
-    echo "Usage: $0 [WINNAME] [DURATION] [CMD (optional)]"
-    exit
+    echo "Incorrect number of arguments. At least 2 arguments required."
+    echo "Usage: $0 [WINNAME] [DURATION] [...ARGS]"
+    exit 1
 fi
+
+win="$1"
+shift
+duration="$1"
+shift
+
+OPTIND=1
+
+while getopts "c:" opt; do
+    case "$opt" in
+        c)
+            cmd="$OPTARG"
+            ;;
+    esac
+done
 
 if [ -f out.gif ]
 then
@@ -23,25 +38,25 @@ fi
 # get screen dimensions
 IFS='x' read sw sh < <(xdpyinfo | grep dimensions | grep -o '[0-9x]*' | head -n1)
 # get window geometry
-read wx wy ww wh < <(wmctrl -lG | grep $1 | sed 's/^[^ ]* *[^ ]* //;s/[^0-9 ].*//;')
+read wx wy ww wh < <(wmctrl -lG | grep $win | sed 's/^[^ ]* *[^ ]* //;s/[^0-9 ].*//;')
 # compute and set new coordinates
 wx=$(($sw/2-$ww/2))
 wy=$(($sh-$wh))
-wmctrl -r $1 -e 0,$wx,$wy,$ww,$wh
+wmctrl -r $win -e 0,$wx,$wy,$ww,$wh
 
 (
 # start screenkey
 "$(dirname "$(readlink -f "$0")")/screenkey/screenkey" >/dev/null 2>&1
 
 # start recording the window
-byzanz-record -x $wx -y $wy -w $ww -h $wh -d $2 out.gif 2> /dev/null
+byzanz-record -x $wx -y $wy -w $ww -h $wh -d $duration out.gif 2> /dev/null
 
 # finished
 ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
 ) &
 
 # run command if provided
-if [ "$3" ]
+if [ "$cmd" ]
 then
-    $3
+    $cmd
 fi

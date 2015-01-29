@@ -6,13 +6,23 @@ A tool for creating GIF screencasts of a terminal, with key presses overlaid.
 
 Dependencies: `wmctrl`, `byzanz-record` (slightly patched `screenkey` already bundled)
 
-Usage: ./cast WINNAME DURATION [COMMAND (optional)]
+Usage: ./mkcast WINNAME DURATION [COMMAND (optional)]  
+Usage: ./newcast [MKCAST ARGS]  
+Usage: ./askcast
 
-Example:
+Examples:
 
     # cast the window titled "Terminal" for 10 seconds, running the "reset"
     # command first
-    ./cast Terminal 10 reset
+    ./mkcast Terminal 10 -c reset
+
+    # equivalent to the above, but creates a new terminal for you
+    ./newcast 10 -c reset
+
+    # asks for arguments to newcast, type ex. "10 -c reset"
+    ./askcast
+
+Suggested use: symlink `mkcast`, `newcast`, and `askcast` in `/usr/local/bin`, and simply type (in GNOME) `Alt+F2 askcast Enter` for a quick mini-cast.
 
 screencast.conf format:
 
