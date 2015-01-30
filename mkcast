@@ -2,6 +2,11 @@
 
 if [ $# -lt 2 ]
 then
+    if [ $# = 1 ] && [ "$1" = "-h" ]
+    then
+        echo "This is help"
+        exit 1
+    fi
     echo "Incorrect number of arguments. At least 2 arguments required."
     echo "Usage: $0 [WINNAME] [DURATION] [...ARGS]"
     exit 1
@@ -14,15 +19,17 @@ shift
 
 OPTIND=1
 
-while getopts "c:" opt; do
+while getopts "F" opt; do
     case "$opt" in
-        c)
-            cmd="$OPTARG"
+        F)
+            force=force
             ;;
     esac
 done
 
-if [ -f out.gif ]
+shift $((OPTIND-1))
+
+if [ -f out.gif ] && [ -z "$force" ]
 then
     echo "Warning: out.gif already exists."
     read -p "Continue? [y/n] " yn
@@ -46,7 +53,7 @@ wmctrl -r $win -e 0,$wx,$wy,$ww,$wh
 
 (
 # start screenkey
-"$(dirname "$(readlink -f "$0")")/screenkey/screenkey" >/dev/null 2>&1
+"$(dirname "$(readlink -f "$0")")/screenkey/screenkey" "$@" >/dev/null 2>&1
 
 # start recording the window
 byzanz-record -x $wx -y $wy -w $ww -h $wh -d $duration out.gif 2> /dev/null
@@ -54,9 +61,3 @@ byzanz-record -x $wx -y $wy -w $ww -h $wh -d $duration out.gif 2> /dev/null
 # finished
 ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
 ) &
-
-# run command if provided
-if [ "$cmd" ]
-then
-    $cmd
-fi

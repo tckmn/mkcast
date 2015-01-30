@@ -56,16 +56,25 @@ class Screenkey(gtk.Window):
     STATE_FILE = os.path.join(glib.get_user_cache_dir(), 
                               'screenkey.dat')
 
-    def __init__(self, logger, nodetach):
+    def __init__(self, logger, nodetach, timeout, size, mode, position, opacity, bgcolor, font#, color):
+            ):
         gtk.Window.__init__(self)
 
         self.timer = None
         self.logger = logger
 
-        self.options = self.load_state()
-        if not self.options:
-            with open(os.path.join(os.path.dirname(__file__), '..', '..', 'screenkey.conf')) as f:
-                self.options = eval(f.read())
+        self.options = {
+                'timeout': timeout,
+                'size': size,
+                'mode': mode,
+                'position': position,
+                'opacity': opacity,
+                'bgcolor': bgcolor,
+                'font': font,
+                'color': #color
+                         [65535, 65535, 65535, 0, -1]
+                }
+        print(repr(self.options))
 
         if not nodetach:
             self.logger.debug("Detach from the parent.")
@@ -92,8 +101,8 @@ class Screenkey(gtk.Window):
         self.label.show()
         self.add(self.label)
 
-        self.screen_width = gtk.gdk.screen_width()   
-        self.screen_height = gtk.gdk.screen_height() 
+        self.screen_width = gtk.gdk.screen_width()
+        self.screen_height = gtk.gdk.screen_height()
         self.set_window_size(self.options['size'])
 
         self.set_gravity(gtk.gdk.GRAVITY_CENTER)
