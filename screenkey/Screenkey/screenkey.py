@@ -74,7 +74,6 @@ class Screenkey(gtk.Window):
                 'color': #color
                          [65535, 65535, 65535, 0, -1]
                 }
-        print(repr(self.options))
 
         if not nodetach:
             self.logger.debug("Detach from the parent.")

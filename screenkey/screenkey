@@ -37,21 +37,21 @@ def Main():
         help=_("do not detach from the parent"))
     parser.add_option("-d", "--debug", action="store_true",
         dest="debug", default=False, help=_("show debug information"))
-    parser.add_option("-t", "--timeout", action="store", type="int",
-        dest="timeout", help=_("timeout"), default=2)
-    parser.add_option("-s", "--size", action="store", type="int",
-        dest="size", help=_("size"), default=4)
-    parser.add_option("-m", "--mode", action="store", type="int",
-        dest="mode", help=_("mode"), default=1)
-    parser.add_option("-p", "--position", action="store", type="int",
-        dest="position", help=_("position"), default=2)
-    parser.add_option("-o", "--opacity", action="store", type="float",
-        dest="opacity", help=_("opacity"), default=0.7)
-    parser.add_option("-b", "--bgcolor", action="store", type="string",
-        dest="bgcolor", help=_("bgcolor"), default='black')
-    parser.add_option("-f", "--font", action="store", type="string",
-        dest="font", help=_("font"), default='Sans')
-    #parser.add_option("-c", "--color", action="store", type="string",
+    parser.add_option("-t", "--timeout", type="int", dest="timeout",
+        help=_("timeout"), default=2)
+    parser.add_option("-s", "--size", type="int", dest="size",
+        help=_("size"), default=4)
+    parser.add_option("-m", "--mode", type="int", dest="mode",
+        help=_("mode"), default=1)
+    parser.add_option("-p", "--position", type="int", dest="position",
+        help=_("position"), default=2)
+    parser.add_option("-o", "--opacity", type="float", dest="opacity",
+        help=_("opacity"), default=0.7)
+    parser.add_option("-b", "--bgcolor", type="string", dest="bgcolor",
+        help=_("bgcolor"), default='black')
+    parser.add_option("-f", "--font", type="string", dest="font",
+        help=_("font"), default='Sans')
+    #parser.add_option("-c", "--color", type="string",
         #dest="color", help=_("color"), default='TODO')
     (options, args) = parser.parse_args()
 

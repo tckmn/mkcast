@@ -1,2 +1,2 @@
 #!/bin/bash
-newcast "$(zenity --entry --text='Args for newcast?')"
+newcast $(zenity --entry --text='Args for newcast?')
