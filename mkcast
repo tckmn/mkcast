@@ -59,8 +59,17 @@ wmctrl -r $win -e 0,$wx,$wy,$ww,$wh
 # start screenkey
 "$(dirname "$(readlink -f "$0")")/screenkey/screenkey" $@ >/dev/null 2>&1
 
+if [[ $duration == W* ]]
+then
+    ENDCMD="--exec"
+    ENDSTR="bash -c 'while kill -0 ${duration:1}; do :; done'"
+else
+    ENDCMD="-d"
+    ENDSTR="duration"
+fi
+
 # start recording the window
-byzanz-record -x $wx -y $wy -w $ww -h $wh -d $duration out.gif 2> /dev/null
+byzanz-record -x $wx -y $wy -w $ww -h $wh $ENDCMD "$ENDSTR" out.gif 2> /dev/null
 
 # finished
 ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
