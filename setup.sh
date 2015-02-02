@@ -8,4 +8,3 @@ fi
 
 ln -s mkcast /usr/local/bin/mkcast
 ln -s newcast /usr/local/bin/newcast
-ln -s askcast /usr/local/bin/askcast
