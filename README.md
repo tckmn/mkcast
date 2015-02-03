@@ -22,13 +22,13 @@ Usage: ./newcast [MKCAST ARGS]
 
 Examples:
 
-    # cast the window titled "Terminal" for 10 seconds, running the "reset"
-    # command first
-    ./mkcast Terminal 10 -c reset
+    # cast the window titled "Terminal" for 10 seconds
+    # (omitting -o will default to out.gif, also supports .webm and .ogg)
+    ./mkcast Terminal 10 -o out.gif
 
     # equivalent to the above, but creates a new terminal for you and finishes
     # when the terminal exits instead of after a certain amount of time
-    ./newcast -c reset
+    ./newcast
 
 # Why GIF?
 
