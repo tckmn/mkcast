@@ -6,5 +6,9 @@ then
     exit 1
 fi
 
-ln -s mkcast /usr/local/bin/mkcast
-ln -s newcast /usr/local/bin/newcast
+MKCASTPATH="$(pwd)/mkcast"
+NEWCASTPATH="$(pwd)/newcast"
+
+cd /usr/local/bin
+ln -s $MKCASTPATH mkcast
+ln -s $NEWCASTPATH newcast
