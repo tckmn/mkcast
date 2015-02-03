@@ -1,4 +1,4 @@
 #!/bin/bash
 gnome-terminal --window-with-profile mkcast -t mkcast --disable-factory >/dev/null 2>&1 &
 sleep 0.5
-mkcast mkcast W$! -F ${@:2}
+mkcast mkcast W$! -F ${@:1}

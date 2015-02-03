@@ -20,10 +20,15 @@ shift
 OPTIND=1
 unknownargs=0
 
-while getopts ":F" opt; do
-    case "$opt" in
+outfile='out.gif'
+
+while getopts ":Fo:" opt; do
+    case "${opt}" in
         F)
             force=force
+            ;;
+        o)
+            outfile=${OPTARG}
             ;;
         *)
             unknownargs=$((unknownargs+1))
@@ -69,7 +74,7 @@ else
 fi
 
 # start recording the window
-byzanz-record -x $wx -y $wy -w $ww -h $wh $ENDCMD "$ENDSTR" out.gif 2> /dev/null
+byzanz-record -x $wx -y $wy -w $ww -h $wh $ENDCMD "$ENDSTR" "$outfile" 2> /dev/null
 
 # finished
 ps ax | grep 'screenkey' | grep -o '^[0-9 ]*' | head -n1 | xargs kill
