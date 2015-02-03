@@ -70,7 +70,7 @@ then
     ENDSTR="bash -c 'while kill -0 ${duration:1}; do :; done'"
 else
     ENDCMD="-d"
-    ENDSTR="duration"
+    ENDSTR="${duration}"
 fi
 
 # start recording the window
