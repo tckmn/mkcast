@@ -52,7 +52,7 @@ then
 fi
 
 # get screen dimensions
-IFS='x' read sw sh < <(xdpyinfo | grep dimensions | grep -o '[0-9x]*' | head -n1)
+IFS='x' read sw sh < <(xdpyinfo | grep dimensions | awk '{print $2}')
 # get window geometry
 read wx wy ww wh < <(wmctrl -lG | grep $win | sed 's/^[^ ]* *[^ ]* //;s/[^0-9 ].*//;')
 # compute and set new coordinates
