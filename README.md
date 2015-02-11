@@ -8,12 +8,12 @@ Dependencies: `wmctrl`, `byzanz-record` (slightly patched `screenkey` already bu
 
 ## Quickstart
 
-    $ sudo ./setup.sh
+    $ sudo make install
     $ newcast  # opens and casts a new terminal window, finishes recording on exit
 
 ## How to use
 
-Suggested use: symlink `mkcast` and `newcast` in `/usr/local/bin` (or just run `setup.sh`), and simply type (in GNOME) `Alt+F2 newcast Enter` for a quick mini-cast.
+Suggested use: symlink `mkcast` and `newcast` in `/usr/local/bin` (or just run `make install`), and simply type (in GNOME) `Alt+F2 newcast Enter` for a quick mini-cast.
 
 This even allows you to set up a `gnome-terminal` profile called "mkcast," letting you automatically start a command when it opens (such as `vim`) and finish when the command exits, customize the size or colors of the new terminal that is created, etc.
 
