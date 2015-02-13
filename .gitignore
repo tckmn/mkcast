@@ -3,3 +3,6 @@
 
 # Python
 *.pyc
+
+# standard output file
+out.gif
