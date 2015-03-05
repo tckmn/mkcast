@@ -6,6 +6,8 @@ A tool for creating GIF screencasts of a terminal, with key presses overlaid.
 
 Dependencies: `wmctrl`, `byzanz-record` (slightly patched `screenkey` already bundled). Only tested on GNOME on Ubuntu so far.
 
+    $ sudo apt-get install wmctrl byzanz
+
 ## Quickstart
 
     $ sudo make install
