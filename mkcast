@@ -38,9 +38,9 @@ done
 
 shift $((OPTIND-1-unknownargs))
 
-if [ -f out.gif ] && [ -z "$force" ]
+if [ -f "$outfile" ] && [ -z "$force" ]
 then
-    echo "Warning: out.gif already exists."
+    echo "Warning: $outfile already exists."
     read -p "Continue? [y/n] " yn
     case $yn in
         [Yy]*)
