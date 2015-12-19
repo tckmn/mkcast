@@ -1,3 +1,13 @@
+# OBSOLETE
+
+mkcast is no longer being maintained (by me, at any rate). It's really just a bundle of hackiness and kludges, so I've essentially rewritten it from scratch: [KeyboardFire/xscast](https://github.com/KeyboardFire/xscast).
+
+xscast's goal is to be usable with any desktop environment. Instead of the buggy screenkey, it uses a dzen2 box to display keys. There are no external Python dependencies; it's written entirely in Bash. It can record any window, instead of relying on moving it to the bottom so that screenkey displays on top of it.
+
+Basically, it's much better. Don't use mkcast.
+
+---
+
 # mkcast
 
 A tool for creating GIF screencasts of a terminal, with key presses overlaid.
